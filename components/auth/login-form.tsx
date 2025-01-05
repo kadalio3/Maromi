@@ -1,10 +1,62 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { LoginButton } from "../button";
+import axios from "axios";
 import Link from "next/link";
 
 const LoginFormPage = () => {
+  const [username, setUsername] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [msg, setMsg] = useState<string>('');
+  const router = useRouter();
+
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      try {
+        // Periksa apakah pengguna sudah memiliki token login
+        const response = await axios.get('http://localhost:5000/token', {
+          withCredentials: true,
+        });
+        if (response.status === 200) {
+          // Jika token valid, arahkan ke dashboard
+          router.push("/dashboard");
+        }
+      } catch (error) {
+        // Jika gagal, biarkan tetap di halaman login
+        console.log("Belum login atau token tidak valid");
+      }
+    };
+    checkLoginStatus();
+  }, [router]);
+
+  const Auth = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      await axios.post(
+        'http://localhost:5000/login',
+        {
+          username: username,
+          password: password,
+        },
+        {
+          withCredentials: true, // Menambahkan kredensial
+        }
+      );
+      router.push("/dashboard");
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error) && error.response) {
+        setMsg(error.response.data.msg);
+      } else {
+        setMsg("Terjadi kesalahan, silakan coba lagi.");
+      }
+    }
+  };
+
   return (
-    <form className="space-y-6">
+    <form onSubmit={Auth} className="space-y-6">
+      <p className="has-text-centered">{msg}</p>
       <div>
         <div className="relative">
           <input
@@ -14,6 +66,8 @@ const LoginFormPage = () => {
             type="text"
             className="peer placeholder-transparent h-10 w-full border-2 border-gray-300 text-gray-900 focus:outline-none focus:border-gray-500 p-2.5"
             placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
           <label
             htmlFor="username"
@@ -31,6 +85,8 @@ const LoginFormPage = () => {
           type="password"
           className="peer placeholder-transparent h-10 w-full border-2 border-gray-300 text-gray-900 focus:outline-none focus:border-gray-500 p-2.5"
           placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
         <label
           htmlFor="password"
@@ -41,7 +97,7 @@ const LoginFormPage = () => {
       </div>
       <LoginButton />
       <p className="text-sm font-light text-gray-500">
-        Dont have an account?
+        Don't have an account?
         <Link href="/register">
           <span className="font-medium pl-1 text-blue-600 hover:text-blue-700">
             Sign Up Here

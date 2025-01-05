@@ -1,10 +1,40 @@
-import React from "react";
-import { LoginButton, RegisterButton } from "../button";
+"use client";
+
+import React, {useState} from "react";
+import { useRouter } from "next/navigation";
+import { RegisterButton } from "../button";
 import Link from "next/link";
+import axios from "axios";
 
 const RegisterFormPage = () => {
+  const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confPassword, setConfPassword] = useState('');
+    const [msg, setMsg] = useState('');
+    const router = useRouter();
+
+    const Register = async (e: React.FormEvent) => {
+      e.preventDefault();
+      try {
+          await axios.post('http://localhost:5000/user', {
+              username: username,
+              email: email,
+              password: password,
+              confPassword: confPassword
+          });
+          router.push("/");
+      } catch (error: any) {
+          if (error.response) {
+              setMsg(error.response.data.msg);
+          }
+      }
+  };
+  
+
   return (
-    <form className="space-y-6">
+    <form onSubmit={Register} className="space-y-6">
+      <p className="has-text-centered">{msg}</p>
       {/* Username Input */}
       <div>
         <div className="relative">
@@ -15,6 +45,7 @@ const RegisterFormPage = () => {
             type="text"
             className="peer placeholder-transparent h-10 w-full border-2 border-gray-300 text-gray-900 focus:outline-none focus:border-gray-500 p-2.5"
             placeholder="Username"
+            value={username} onChange={(e) => setUsername(e.target.value)}
           />
           <label
             htmlFor="username"
@@ -35,6 +66,7 @@ const RegisterFormPage = () => {
             type="email"
             className="peer placeholder-transparent h-10 w-full border-2 border-gray-300 text-gray-900 focus:outline-none focus:border-gray-500 p-2.5"
             placeholder="Email"
+            value={email} onChange={(e) => setEmail(e.target.value)}
           />
           <label
             htmlFor="email"
@@ -54,6 +86,7 @@ const RegisterFormPage = () => {
           type="password"
           className="peer placeholder-transparent h-10 w-full border-2 border-gray-300 text-gray-900 focus:outline-none focus:border-gray-500 p-2.5"
           placeholder="Password"
+          value={password} onChange={(e) => setPassword(e.target.value)}
         />
         <label
           htmlFor="password"
@@ -72,6 +105,7 @@ const RegisterFormPage = () => {
           type="password"
           className="peer placeholder-transparent h-10 w-full border-2 border-gray-300 text-gray-900 focus:outline-none focus:border-gray-500 p-2.5"
           placeholder="Confirm Password"
+          value={confPassword} onChange={(e) => setConfPassword(e.target.value)}
         />
         <label
           htmlFor="confirmPassword"

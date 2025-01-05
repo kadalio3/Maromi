@@ -1,6 +1,9 @@
-const LoginLayout = ({children}: {children: React.ReactNode}) => {
+import Navbar from "@/components/navbar"
+
+const RegisterLayout = ({children}: {children: React.ReactNode}) => {
     return (
       <div className="bg-gray-100">
+          <Navbar />
           <div className="flex flex-col items-center justify-between px-6 py-8 mx-auto h-secreen">
               <div className="w-full bg-white rounded-lg shadow mt-0 max-w-md">
                   {children}
@@ -10,4 +13,4 @@ const LoginLayout = ({children}: {children: React.ReactNode}) => {
     )
   }
   
-  export default LoginLayout
+  export default RegisterLayout
