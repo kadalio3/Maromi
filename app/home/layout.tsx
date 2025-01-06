@@ -30,7 +30,7 @@ export default function HomeLayout({ children }: { children: React.ReactNode }) 
         <div className="border-b border-gray-300 dark:border-gray-700">
           <HomeNavbar />
         </div>
-        <main className="container mx-auto px-4 py-8">
+        <main className="container mx-auto px-4 py-0">
           {children}
         </main>
       </body>

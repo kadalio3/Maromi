@@ -22,8 +22,8 @@ export default function Navbar() {
       >
         <ul className="space-y-6 lg:space-y-0 lg:flex lg:gap-6">
           {[
-            { href: '#home', label: 'Home' },
-            { href: '#about', label: 'About' },
+            { href: '/home', label: 'Home' },
+            { href: '/home/about', label: 'About' },
             { href: '#profile', label: 'Profile' },
             { href: '#store', label: 'Store' },
             { href: '#events', label: 'Events' },
