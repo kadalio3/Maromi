@@ -24,7 +24,7 @@ const HomeIntro: React.FC = () => {
             Welcome to my website created by my fans, take a explore what's inside this web. You can explore about me, who I am, and you can shop from here like buy photopack, FS, merchandise punipun, or you can visit my cafe from here.
             You can also see a photo gallery of events that I have participated in and some of the attendees. Also, you can check the latest events that I will participate in.
           </p>
-          <a href="#about" className="button mt-6 inline-block bg-blue-500 text-white py-2 px-4 rounded">
+          <a href="/home/about" className="button mt-6 inline-block bg-blue-500 text-white py-2 px-4 rounded">
             Explore Now
           </a>
         </div>

@@ -11,7 +11,7 @@ export default function Navbar() {
 
   return (
     <nav className="container mx-auto flex items-center justify-between p-4">
-      <a href="#" className="text-2xl font-bold text-gray-800 dark:text-white">
+      <a href="/home" className="text-2xl font-bold text-gray-800 dark:text-white">
         Maromi
       </a>
 
@@ -26,8 +26,6 @@ export default function Navbar() {
             { href: '/home/about', label: 'About' },
             { href: '#profile', label: 'Profile' },
             { href: '#store', label: 'Store' },
-            { href: '#events', label: 'Events' },
-            { href: '#image', label: 'Gallery' },
           ].map((link) => (
             <li key={link.href} className="nav__item">
               <a
