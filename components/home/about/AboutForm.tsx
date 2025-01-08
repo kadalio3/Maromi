@@ -92,68 +92,64 @@ const AboutForm: React.FC = () => {
       {/* Career Section */}
       <section className="career section" id="profile">
         <h2 className="text-xl font-bold text-center mb-6" data-aos="fade-right">
-        VTuber Project History
+          VTuber Project History
         </h2>
-        <div className="container mx-auto space-y-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="container mx-auto">
+          {/* Timeline Container */}
+          <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8 before:content-[''] before:absolute before:w-1 before:bg-gray-300 before:top-0 before:bottom-0 before:left-1/2 before:transform before:-translate-x-1/2">
             {/* Career Items */}
             {[
               {
                 title: "GameWith✕AttendMe主催「鈴蘭の剣」PRイベント参加",
-                location: "Indonesia",
                 date: "2006-now",
                 aos: "flip-left",
               },
               {
                 title: "第5回GameWith✕AttendMe主催「勝利の女神:NIKKE」PRイベント参加",
-                location: "Jakarta, Indonesia",
                 date: "2015-now",
                 aos: "flip-right",
               },
               {
                 title: "第3回GameWith✕AttendMe主催「勝利の女神:NIKKE」PRイベント参加",
-                location: "Indonesia",
                 date: "2006-now",
                 aos: "flip-left",
               },
               {
                 title: "どこでもキャッチャー様グッズコラボ",
-                location: "Jakarta, Indonesia",
                 date: "2015-now",
                 aos: "flip-right",
               },
               {
                 title: "勝利の女神:NIKKE×Gmae8コラボイベント参加",
-                location: "Indonesia",
                 date: "2006-now",
                 aos: "flip-left",
               },
               {
                 title: "ときめきVR　新年イベント",
-                location: "Jakarta, Indonesia",
                 date: "2015-now",
                 aos: "flip-right",
               },
               {
                 title: "Vtu\"Bar\"　トークイベント",
-                location: "Indonesia",
                 date: "2006-now",
                 aos: "flip-left",
               },
               {
                 title: "どこでもキャッチャー様PR",
-                location: "Jakarta, Indonesia",
                 date: "2015-now",
                 aos: "flip-right",
               },
             ].map((career, index) => (
-              <div key={index} data-aos={career.aos}>
+              <div
+                key={index}
+                className={`relative p-6 bg-white rounded-lg shadow-lg ${
+                  index % 2 === 0 ? "md:ml-auto" : "md:mr-auto"
+                }`}
+                data-aos={career.aos}
+              >
                 <h3 className="career__title text-lg font-semibold">
                   {career.title}
                 </h3>
-                <span className="block text-sm text-gray-500">
-                  {career.location}
-                </span>
                 <div className="text-sm text-gray-500 mt-2 flex items-center space-x-2">
                   <i className="ri-calendar-fill text-gray-400"></i>
                   <span>{career.date}</span>
